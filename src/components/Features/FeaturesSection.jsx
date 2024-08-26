@@ -58,7 +58,7 @@ const FeaturesSection = () => {
 
 	return (
 		<section id="tabs">
-			<div className="container relative mx-auto my-4 mb-32 px-6">
+			<div className="container relative mx-auto my-4 px-6">
 				<h2 className="mb-4 text-5xl font-semibold text-center m-16">
 					Features
 				</h2>

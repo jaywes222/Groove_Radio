@@ -2,6 +2,7 @@ import React from 'react';
 import hero from '../../assets/hero.svg';
 import FeaturesSection from '../Features/FeaturesSection';
 import HeroSection from './HeroSection';
+import ScheduleSection from '../Schedule/ScheduleSection';
 
 const HomePage = () => {
 	return (
@@ -15,7 +16,8 @@ const HomePage = () => {
 			/>
 			{/* Features */}
 			<FeaturesSection />
-			{/* Features */}
+            {/* Schedule */}
+            <ScheduleSection />
 		</>
 	);
 };
