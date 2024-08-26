@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/HomePage';
 
 
 
@@ -7,7 +8,7 @@ function App() {
     <>
       <Navbar />
       <main>
-        
+        <Home />
       </main>
     </>
   )
