@@ -1,6 +1,7 @@
 import React from 'react';
-import HeroSection from './HeroSection';
 import hero from '../../assets/hero.svg';
+import FeaturesSection from '../Features/FeaturesSection';
+import HeroSection from './HeroSection';
 
 const HomePage = () => {
 	return (
@@ -13,6 +14,7 @@ const HomePage = () => {
 				image={hero}
 			/>
 			{/* Features */}
+			<FeaturesSection />
 			{/* Features */}
 		</>
 	);
