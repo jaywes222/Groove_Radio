@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import scheduleData from './scheduleData';
 import CurrentShow from './CurrentShow'; // Import the CurrentShow component
+import scheduleData from './scheduleData';
 
 const daysOfWeek = [
 	'Monday',
@@ -17,9 +17,8 @@ const ScheduleTable = () => {
 
 	const getCurrentShow = (day) => {
 		const now = new Date();
-		const currentTime = `${now.getHours()}:${
-			now.getMinutes() < 10 ? '0' : ''
-		}${now.getMinutes()}`;
+		const currentTime = `${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''
+			}${now.getMinutes()}`;
 		return scheduleData[day].find((show) => {
 			const [start, end] = show.time.split(' - ');
 			return start <= currentTime && end >= currentTime;
@@ -30,9 +29,8 @@ const ScheduleTable = () => {
 		return scheduleData[day].map((show, index) => (
 			<tr
 				key={index}
-				className={`border-b ${
-					index % 2 === 0 ? 'bg-earthYellow' : 'bg-white'
-				}`}
+				className={`border-b ${index % 2 === 0 ? 'bg-earthYellow' : 'bg-white'
+					}`}
 			>
 				<td className="border px-4 py-2 text-center text-sm">
 					{show.time}
@@ -60,17 +58,17 @@ const ScheduleTable = () => {
 				<td className="border px-4 py-2 text-center text-sm">
 					{show.hashtags
 						? show.hashtags.split(' ').map((hashtag, i) => (
-								<a
-									key={i}
-									href={`https://x.com/hashtag/${hashtag.replace(
-										'#',
-										''
-									)}`}
-									className="text-spanishOrange hover:underline mr-1"
-								>
-									{hashtag}
-								</a>
-						  ))
+							<a
+								key={i}
+								href={`https://x.com/hashtag/${hashtag.replace(
+									'#',
+									''
+								)}`}
+								className="text-spanishOrange hover:underline mr-1"
+							>
+								{hashtag}
+							</a>
+						))
 						: 'N/A'}
 				</td>
 				<td className="border px-4 py-2 text-center text-sm">
@@ -106,11 +104,10 @@ const ScheduleTable = () => {
 						{daysOfWeek.map((day) => (
 							<li
 								key={day}
-								className={`cursor-pointer px-4 py-2 text-base sm:text-lg ${
-									selectedDay === day
+								className={`cursor-pointer px-4 py-2 text-base sm:text-lg ${selectedDay === day
 										? 'border-b-2 border-spanishOrange text-spanishOrange'
 										: 'text-gray-600'
-								}`}
+									}`}
 								onClick={() => setSelectedDay(day)}
 							>
 								{day}

@@ -3,6 +3,7 @@ import hero from '../../assets/hero.svg';
 import FeaturesSection from '../Features/FeaturesSection';
 import HeroSection from './HeroSection';
 import ScheduleSection from '../Schedule/ScheduleSection';
+import NewsSection from '../News/NewsSection';
 
 const HomePage = () => {
 	return (
@@ -16,8 +17,10 @@ const HomePage = () => {
 			/>
 			{/* Features */}
 			<FeaturesSection />
-            {/* Schedule */}
-            <ScheduleSection />
+			{/* Schedule */}
+			<ScheduleSection />
+			{/* News */}
+			<NewsSection />
 		</>
 	);
 };
