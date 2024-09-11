@@ -37,7 +37,7 @@ const Navbar = () => {
 				} md:flex flex-col md:flex-row items-center md:space-x-6 space-y-4 md:space-y-0 w-full md:w-auto absolute md:relative top-full left-0 md:top-auto md:left-auto bg-gray-900 md:bg-transparent md:px-0 px-6 py-4 md:py-0 z-50`}
 			>
 				<LinkWithIcon title="Home" link="/" emoji={equalizer} />
-				<LinkWithIcon title="Schedule" link="/" emoji={schedule} />
+				<LinkWithIcon title="Schedule" link="/schedule" emoji={schedule} />
 				<LinkWithIcon title="Archives" link="/" emoji={archive} />
 				<LinkWithIcon title="Blog" link="/" emoji={blogging} />
 				<LinkWithIcon title="About" link="/" emoji={about} />

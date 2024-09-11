@@ -93,7 +93,7 @@ const ScheduleTable = () => {
 	const currentShow = getCurrentShow(selectedDay);
 
 	return (
-		<section className="m-5">
+		<section id="schedule" className="m-5">
 			<div className="mx-auto px-4">
 				<h2 className="mb-6 text-3xl sm:text-5xl font-semibold text-center mt-16">
 					Weekly Schedule

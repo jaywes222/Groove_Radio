@@ -4,6 +4,7 @@ import FeaturesSection from '../Features/FeaturesSection';
 import HeroSection from './HeroSection';
 import ScheduleSection from '../Schedule/ScheduleSection';
 import NewsSection from '../News/NewsSection';
+import MerchandiseSection from '../Merch/MerchandiseSection';
 
 const HomePage = () => {
 	return (
@@ -21,6 +22,8 @@ const HomePage = () => {
 			<ScheduleSection />
 			{/* News */}
 			<NewsSection />
+			{/* Merch */}
+			<MerchandiseSection />
 		</>
 	);
 };

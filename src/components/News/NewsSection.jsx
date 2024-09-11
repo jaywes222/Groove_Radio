@@ -43,7 +43,7 @@ const NewsSection = () => {
             readMoreLink: "#",
         },
         {
-            image: "src/assets/blog5.jpg",
+            image: "src/assets/blog5.webp",
             title: "Tech Startups on the Rise",
             description:
                 "With increasing foreign investments, Kenya’s tech scene is booming like never before.",
