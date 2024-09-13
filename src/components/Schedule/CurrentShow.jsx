@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
+import backgroundImage from '../../assets/music.jpg';
 
 const CurrentShow = ({ show, recommendations }) => {
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -18,11 +19,12 @@ const CurrentShow = ({ show, recommendations }) => {
 	};
 
 	return (
-		<div
-			className="relative bg-cover bg-center rounded-lg shadow-lg p-6 text-white mb-8"
-		>
+		<div className="relative bg-cover bg-center rounded-lg shadow-lg p-6 text-white mb-8">
+			<div
+				className="absolute inset-0 bg-black opacity-85 rounded-lg"
+				style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+			></div>
 
-			<div className="absolute inset-0 bg-black opacity-60 rounded-lg"></div>
 			<div className="relative z-10 flex flex-col items-center justify-center h-full">
 				{/* Show Details */}
 				<h3 className="text-2xl font-semibold mb-2 animate-bounce">
@@ -84,7 +86,7 @@ const CurrentShow = ({ show, recommendations }) => {
 						</li>
 					))} */}
 				</ul>
-			</div>
+			</div> 
 		</div>
 	);
 };
