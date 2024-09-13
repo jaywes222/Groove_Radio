@@ -6,6 +6,7 @@ import ScheduleSection from '../Schedule/ScheduleSection';
 import NewsSection from '../News/NewsSection';
 import MerchandiseSection from '../Merch/MerchandiseSection';
 import PodAdSection from '../PodAd/PodAdSection';
+import FAQAccordionSection from '../FAQ/FAQAccordionSection';
 
 const HomePage = () => {
 	return (
@@ -25,8 +26,10 @@ const HomePage = () => {
 			<NewsSection />
 			{/* Merch */}
 			<MerchandiseSection />
-			{/* Merch */}
+			{/* PodAd*/}
 			<PodAdSection />
+			{/* FAQ */}
+			<FAQAccordionSection />
 		</>
 	);
 };

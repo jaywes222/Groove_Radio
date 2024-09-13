@@ -61,7 +61,7 @@ const Merchandise = () => {
         <section id="merchandise">
             <div className="container mx-auto px-6">
                 <h2 className="mb-6 text-4xl font-semibold text-center">Merchandise</h2>
-                <p className="max-w-md mx-auto text-center text-grayishBlue">Groove With Us Anywhere You Go</p>
+                <p className="max-w-md mx-auto text-center text-battleshipGray">Groove With Us Anywhere You Go</p>
             </div>
 
             <div className="container mx-auto px-4 py-8">
@@ -98,6 +98,7 @@ const Merchandise = () => {
                             >
                                 <option value={3}>3</option>
                                 <option value={6}>6</option>
+                                <option value={9}>9</option>
                                 <option value={12}>12</option>
                             </select>
                         </div>
