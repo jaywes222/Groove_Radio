@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CurrentShow from './CurrentShow'; // Import the CurrentShow component
+import ScheduleSection from './ScheduleTable';
 import scheduleData from './scheduleData';
 
 const daysOfWeek = [
@@ -105,8 +106,8 @@ const ScheduleTable = () => {
 							<li
 								key={day}
 								className={`cursor-pointer px-4 py-2 text-base sm:text-lg ${selectedDay === day
-										? 'border-b-2 border-spanishOrange text-spanishOrange'
-										: 'text-gray-600'
+									? 'border-b-2 border-spanishOrange text-spanishOrange'
+									: 'text-gray-600'
 									}`}
 								onClick={() => setSelectedDay(day)}
 							>

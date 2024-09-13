@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar/Navbar';
-import Home from './components/Home/HomePage';
-
+import Routing from './components/Routing/Routing';
 
 
 function App() {
@@ -8,10 +7,10 @@ function App() {
     <>
       <Navbar />
       <main>
-        <Home />
+        <Routing />
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

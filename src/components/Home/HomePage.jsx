@@ -1,14 +1,14 @@
 import React from 'react';
 import hero from '../../assets/hero.svg';
-import FeaturesSection from '../Features/FeaturesSection';
-import HeroSection from './HeroSection';
-import ScheduleSection from '../Schedule/ScheduleSection';
-import NewsSection from '../News/NewsSection';
-import MerchandiseSection from '../Merch/MerchandiseSection';
-import PodAdSection from '../PodAd/PodAdSection';
 import FAQAccordionSection from '../FAQ/FAQAccordionSection';
-import NewsLetterSignUpSection from '../NewsLetter/NewsLetterSignUpSection';
+import FeaturesSection from '../Features/FeaturesSection';
 import FooterSection from '../Footer/FooterSection';
+import MerchandiseSection from '../Merch/MerchandiseSection';
+import NewsSection from '../News/NewsSection';
+import NewsLetterSignUpSection from '../NewsLetter/NewsLetterSignUpSection';
+import PodAdSection from '../PodAd/PodAdSection';
+import HeroSection from './HeroSection';
+import ScheduleTable from '../Schedule/ScheduleTable';
 
 const HomePage = () => {
 	return (
@@ -23,7 +23,7 @@ const HomePage = () => {
 			{/* Features */}
 			<FeaturesSection />
 			{/* Schedule */}
-			<ScheduleSection />
+			<ScheduleTable />
 			{/* News */}
 			<NewsSection />
 			{/* Merch */}

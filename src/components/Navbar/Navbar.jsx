@@ -38,11 +38,11 @@ const Navbar = () => {
 			>
 				<LinkWithIcon title="Home" link="/" emoji={equalizer} />
 				<LinkWithIcon title="Schedule" link="/schedule" emoji={schedule} />
-				<LinkWithIcon title="Archives" link="/" emoji={archive} />
-				<LinkWithIcon title="Blog" link="/" emoji={blogging} />
-				<LinkWithIcon title="About" link="/" emoji={about} />
-				<LinkWithIcon title="Log In" link="/" emoji={idButton} />
-				<LinkWithIcon title="Sign Up" link="/" emoji={memo} />
+				<LinkWithIcon title="Archives" link="/archives" emoji={archive} />
+				<LinkWithIcon title="Blog" link="/news" emoji={blogging} />
+				<LinkWithIcon title="About" link="/about" emoji={about} />
+				<LinkWithIcon title="Log In" link="/login" emoji={idButton} />
+				<LinkWithIcon title="Sign Up" link="/signup" emoji={memo} />
 			</div>
 		</section>
 	);
