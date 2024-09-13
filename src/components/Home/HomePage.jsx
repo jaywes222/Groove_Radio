@@ -7,6 +7,8 @@ import NewsSection from '../News/NewsSection';
 import MerchandiseSection from '../Merch/MerchandiseSection';
 import PodAdSection from '../PodAd/PodAdSection';
 import FAQAccordionSection from '../FAQ/FAQAccordionSection';
+import NewsLetterSignUpSection from '../NewsLetter/NewsLetterSignUpSection';
+import FooterSection from '../Footer/FooterSection';
 
 const HomePage = () => {
 	return (
@@ -30,6 +32,10 @@ const HomePage = () => {
 			<PodAdSection />
 			{/* FAQ */}
 			<FAQAccordionSection />
+			{/* NewsLetterSignUp */}
+			<NewsLetterSignUpSection />
+			{/* Footer */}
+			<FooterSection />
 		</>
 	);
 };
