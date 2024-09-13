@@ -17,7 +17,6 @@ const HomePage = () => {
 			<HeroSection
 				title="Welcome to Groove Radio"
 				subtitle="Your ultimate destination for great music, conversations & latest news."
-				link=""
 				image={hero}
 			/>
 			{/* Features */}
