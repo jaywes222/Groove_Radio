@@ -18,14 +18,6 @@ const Panel = ({ image, altText, title, content }) => (
 			<p className="max-w-md mx-auto text-center text-battleshipGray md:mx-0 md:text-left">
 				{content}
 			</p>
-			<div className="mx-auto md:mx-0">
-				<a
-					href="#"
-					className="px-6 py-3 mt-4 font-semibold text-white border-2 border-white rounded-lg md:inline-flex bg-earthYellow hover:bg-white hover:text-earthYellow hover:border-earthYellow"
-				>
-					More Info
-				</a>
-			</div>
 		</div>
 	</div>
 );

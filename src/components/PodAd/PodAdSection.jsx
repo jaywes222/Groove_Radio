@@ -9,10 +9,6 @@ const PodAdSection = () => {
         setIsModalOpen(false);
     };
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-
     return (
         <section id="pod-ad" className='py-8 md:py-20'>
             {/* Podcast/Ad Heading */}
