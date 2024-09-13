@@ -29,7 +29,7 @@ const Merchandise = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState(productsData);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [itemsPerPage, setItemsPerPage] = useState(6);
+    const [itemsPerPage, setItemsPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
 
     // Simulate loading data
