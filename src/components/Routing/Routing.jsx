@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from '../Home/HomePage';
 import ScheduleTable from '../Schedule/ScheduleTable';
 import NewsSection from '../News/NewsSection';
+import LoginPage from '../Authentication/LoginPage';
 
 const Routing = () => {
     return (
@@ -13,7 +14,7 @@ const Routing = () => {
             <Route path="/news" element={<NewsSection />} />
             {/* <Route path="/about" element={<AboutPage />} /> */}
             {/* <Route path="/signup" element={<SignupPage />} /> */}
-            {/* <Route path="/login" element={<LoginPage />} /> */}
+            <Route path="/login" element={<LoginPage />} />
             {/* <Route element={<ProtectedRoute />}>
                 <Route path="/profile" element={<ProfileSection />} />
                 <Route path="/myshows" element={<MyShowsSection />} />
