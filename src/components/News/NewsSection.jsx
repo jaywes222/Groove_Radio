@@ -107,17 +107,17 @@ const NewsSection = () => {
     return (
         <section
             id="news-section"
-            className='py-20'
+            className='py-8 md:py-20'
         >
-            <div className="container mx-auto px-6">
-                <h2 className="text-5xl font-semibold text-center mb-4">News & Updates</h2>
-                <p className="text-center max-w-md mx-auto text-battleshipGray">
+            <div className="container mx-auto px-4 md:px-6">
+                <h2 className="text-3xl md:text-5xl font-semibold text-center mb-4">News & Updates</h2>
+                <p className="text-center max-w-xs md:max-w-md mx-auto text-battleshipGray">
                     Our aim is to provide you with unbiased info
                 </p>
             </div>
 
-            <section id="blog" className="rounded-lg py-20">
-                <div className="container mx-auto px-6">
+            <section id="blog" className="rounded-lg py-8 md:py-20">
+                <div className="container mx-auto px-4 md:px-6">
                     <BlogGrid blogPosts={blogPosts} />
                 </div>
             </section>

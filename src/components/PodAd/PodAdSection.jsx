@@ -14,7 +14,7 @@ const PodAdSection = () => {
     };
 
     return (
-        <section id="pod-ad">
+        <section id="pod-ad" className='py-8 md:py-20'>
             {/* Podcast/Ad Heading */}
             <div className="container mx-auto my-4 px-6">
                 <h2 className="mb-6 text-4xl font-semibold text-center">Podcast & Advertise Hub</h2>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CurrentShow from './CurrentShow'; // Import the CurrentShow component
-import ScheduleSection from './ScheduleTable';
 import scheduleData from './scheduleData';
 
 const daysOfWeek = [
@@ -18,8 +17,7 @@ const ScheduleTable = () => {
 
 	const getCurrentShow = (day) => {
 		const now = new Date();
-		const currentTime = `${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''
-			}${now.getMinutes()}`;
+		const currentTime = `${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}`;
 		return scheduleData[day].find((show) => {
 			const [start, end] = show.time.split(' - ');
 			return start <= currentTime && end >= currentTime;
@@ -30,21 +28,16 @@ const ScheduleTable = () => {
 		return scheduleData[day].map((show, index) => (
 			<tr
 				key={index}
-				className={`border-b ${index % 2 === 0 ? 'bg-earthYellow' : 'bg-white'
-					}`}
+				className={`border-b ${index % 2 === 0 ? 'bg-earthYellow' : 'bg-white'}`}
 			>
-				<td className="border px-4 py-2 text-center text-sm">
-					{show.time}
-				</td>
-				<td className="border px-4 py-2 text-center text-sm">
-					{show.show}
-				</td>
+				<td className="border px-4 py-2 text-center text-sm">{show.time}</td>
+				<td className="border px-4 py-2 text-center text-sm">{show.show}</td>
 				<td className="border px-4 py-2 text-center text-sm">
 					<div className="flex items-center justify-center">
 						{show.image && (
 							<img
 								src={show.image}
-								alt={show.presenters}
+								alt={`Presenter: ${show.presenters}`}
 								className="w-12 h-12 rounded-full object-cover mr-2"
 							/>
 						)}
@@ -61,10 +54,7 @@ const ScheduleTable = () => {
 						? show.hashtags.split(' ').map((hashtag, i) => (
 							<a
 								key={i}
-								href={`https://x.com/hashtag/${hashtag.replace(
-									'#',
-									''
-								)}`}
+								href={`https://x.com/hashtag/${hashtag.replace('#', '')}`}
 								className="text-spanishOrange hover:underline mr-1"
 							>
 								{hashtag}
@@ -95,13 +85,13 @@ const ScheduleTable = () => {
 
 	return (
 		<section id="schedule" className="m-5">
-			<div className="mx-auto px-4">
-				<h2 className="mb-6 text-3xl sm:text-5xl font-semibold text-center mt-16">
+			<div className="mx-auto px-4 md:px-6">
+				<h2 className="mb-6 text-3xl sm:text-4xl font-semibold text-center mt-16">
 					Weekly Schedule
 				</h2>
 				{currentShow && <CurrentShow show={currentShow} />}
-				<div className="mb-4 flex justify-center">
-					<ul className="flex border-b">
+				<div className="mb-4 flex justify-center overflow-x-auto">
+					<ul className="flex border-b overflow-x-auto">
 						{daysOfWeek.map((day) => (
 							<li
 								key={day}
@@ -117,7 +107,7 @@ const ScheduleTable = () => {
 					</ul>
 				</div>
 				<div className="overflow-x-auto">
-					<table className="w-full border-collapse bg-white shadow-lg">
+					<table className="min-w-full border-collapse bg-white shadow-lg">
 						<thead>
 							<tr className="bg-spanishOrange text-white uppercase text-xs sm:text-sm">
 								{headings.map((heading, index) => (

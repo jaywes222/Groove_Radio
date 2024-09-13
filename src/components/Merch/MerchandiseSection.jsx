@@ -59,15 +59,15 @@ const Merchandise = () => {
 
     return (
         <section id="merchandise">
-            <div className="container mx-auto px-6">
-                <h2 className="mb-6 text-4xl font-semibold text-center">Merchandise</h2>
-                <p className="max-w-md mx-auto text-center text-battleshipGray">Groove With Us Anywhere You Go</p>
+            <div className="container mx-auto px-4 md:px-6">
+                <h2 className="text-3xl md:text-4xl font-semibold text-center mb-6">Merchandise</h2>
+                <p className="text-center text-battleshipGray mb-6">Groove With Us Anywhere You Go</p>
             </div>
 
-            <div className="container mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="flex flex-col md:flex-row">
                     {/* Sidebar */}
-                    <aside className="md:col-span-1">
+                    <aside className="mb-6 md:mb-0 md:w-1/4">
                         <div className="bg-gray-100 p-4 rounded-lg shadow-md">
                             <h3 className="text-xl font-semibold mb-4">Categories</h3>
                             <ul>
@@ -86,9 +86,9 @@ const Merchandise = () => {
                     </aside>
 
                     {/* Merchandise Grid */}
-                    <div className="md:col-span-3">
+                    <div className="md:w-3/4">
                         {/* Items per Page Dropdown */}
-                        <div className="mb-4">
+                        <div className="mb-4 flex justify-between items-center flex-col md:flex-row">
                             <label htmlFor="itemsPerPage" className="mr-2">Items per page:</label>
                             <select
                                 id="itemsPerPage"
@@ -103,7 +103,7 @@ const Merchandise = () => {
                             </select>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {loading ? (
                                 Array.from({ length: itemsPerPage }).map((_, index) => <MerchandiseCardSkeleton key={index} />)
                             ) : (
@@ -117,6 +117,25 @@ const Merchandise = () => {
                                     />
                                 ))
                             )}
+                        </div>
+
+                        {/* Pagination Controls */}
+                        <div className="mt-6 flex justify-between items-center">
+                            <button
+                                onClick={() => setCurrentPage(page => Math.max(page - 1, 1))}
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md"
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                            </button>
+                            <span>Page {currentPage}</span>
+                            <button
+                                onClick={() => setCurrentPage(page => (page * itemsPerPage < filteredProducts.length ? page + 1 : page))}
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md"
+                                disabled={currentPage * itemsPerPage >= filteredProducts.length}
+                            >
+                                Next
+                            </button>
                         </div>
                     </div>
                 </div>
