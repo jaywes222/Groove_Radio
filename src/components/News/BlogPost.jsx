@@ -39,7 +39,7 @@ const BlogPost = ({ selectedPost }) => {
                         href={readMoreLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-spanishOrange hover:text-earthYellow transition-colors duration-300"
+                        className="text-earthYellow hover:text-spanishOrange transition-colors duration-300"
                     >
                         Read the full post
                     </a>

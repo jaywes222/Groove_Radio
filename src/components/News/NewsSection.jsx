@@ -13,14 +13,14 @@ const NewsSection = () => {
             category: "Politics",
         },
         {
-            image: "src/assets/blog2.jpg",
-            title: "Money Looting?",
+            image: "src/assets/blogJ.webp",
+            title: "Noon Bites & Brainwaves",
             description:
-                "Former Murang’a County Water CEC, PAUL MACHARIA, buys a house worth Ksh 258 Million in Washington State, U.S.",
-            author: "Sarah Smith",
-            time: "5 hrs ago",
-            category: "Gossip",
-            readMoreLink: "#",
+                "You want it so much you’re willing to live for it. Most people think the biggest sacrifice they can make is to die for something. They are wrong. Who am I to judge so? I am The Skptic.",
+            author: "Jack Jr",
+            time: "20 mins ago",
+            category: "Fiction",
+            readMoreLink: "https://medium.com/@jj_jots/noon-bites-brainwaves-ff61007899d6",
         },
         {
             image: "src/assets/blog3.jpg",
