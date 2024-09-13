@@ -7,7 +7,7 @@
 ## Screens
 <div style="display: flex; justify-content: space-between;">
   <img src="src/assets/Home_Page.PNG" alt="Home Page" width="200" />
-  <img src="src/assets/nowPlaying.PNG" alt="Now Playing" width="200" /> 
+  <img src="src/assets/Now_Playing.PNG" alt="Now Playing" width="200" /> 
   <img src="src/assets/genres.PNG" alt="Genre Selection" width="200" /> 
   <img src="src/assets/playlist.PNG" alt="Playlist Creation" width="200" /> 
   <img src="src/assets/profile.PNG" alt="User Profile" width="200" /> 
