@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
-import CurrentShow from './CurrentShow'; // Import the CurrentShow component
+import CurrentShow from './CurrentShow';
 import scheduleData from './scheduleData';
 
 const daysOfWeek = [
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
+	'Weekdays',  
 	'Saturday',
 ];
 
 const ScheduleTable = () => {
-	const [selectedDay, setSelectedDay] = useState('Monday');
+	const [selectedDay, setSelectedDay] = useState('Weekdays');
 	const headings = ['Time', 'Show', 'Presenters', 'Hashtags', 'Actions'];
 
 	const getCurrentShow = (day) => {
 		const now = new Date();
 		const currentTime = `${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}`;
-		return scheduleData[day].find((show) => {
+		const daySchedule = day === 'Weekdays' ? scheduleData['Monday'] : scheduleData[day];
+		return daySchedule.find((show) => {
 			const [start, end] = show.time.split(' - ');
 			return start <= currentTime && end >= currentTime;
 		});
 	};
 
 	const renderRows = (day) => {
-		return scheduleData[day].map((show, index) => (
+		const daySchedule = day === 'Weekdays' ? scheduleData['Monday'] : scheduleData[day];
+		return daySchedule.map((show, index) => (
 			<tr
 				key={index}
 				className={`border-b ${index % 2 === 0 ? 'bg-earthYellow' : 'bg-white'}`}
@@ -101,7 +99,7 @@ const ScheduleTable = () => {
 									}`}
 								onClick={() => setSelectedDay(day)}
 							>
-								{day}
+								{day === 'Weekdays' ? 'Monday to Friday' : day}
 							</li>
 						))}
 					</ul>
