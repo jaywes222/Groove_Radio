@@ -4,7 +4,6 @@ import archive from '../../assets/archive.png';
 import blogging from '../../assets/blogging.png';
 import equalizer from '../../assets/equalizer.png';
 import idButton from '../../assets/id-button.png';
-import memo from '../../assets/memo.png';
 import schedule from '../../assets/schedule.png';
 import HamburgerIcon from './HamburgerIcon';
 import LinkWithIcon from './LinkWithIcon';
@@ -42,7 +41,6 @@ const Navbar = () => {
 				<LinkWithIcon title="Blog" link="/news" emoji={blogging} />
 				<LinkWithIcon title="About" link="/about" emoji={about} />
 				<LinkWithIcon title="Log In" link="/login" emoji={idButton} />
-				<LinkWithIcon title="Sign Up" link="/signup" emoji={memo} />
 			</div>
 		</section>
 	);

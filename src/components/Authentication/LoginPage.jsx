@@ -1,114 +1,160 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Modal from '../Common/Modal';
+import UserProfileUpload from './UserProfileUpload';
+import InputField from '../Common/InputField';
+import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import toast CSS
 
+// Schema validation using Zod for the new user registration
+const registrationSchema = z.object({
+	name: z.string().min(12, { message: 'Please enter your full name' }),
+	email: z.string().email({ message: 'Please enter a valid email address.' }).min(3),
+	password: z.string().min(8, { message: 'Password should be at least 8 characters.' }),
+	cpassword: z.string(),
+	address: z.string().min(15, { message: 'Address must be at least 15 characters.' }),
+}).refine((data) => data.password === data.cpassword, {
+	message: 'Confirm password does not match password',
+	path: ['cpassword'],
+});
 
-// Schema validation using Zod
-const schema = z.object({
-	email: z
-		.string()
-		.email({ message: 'Please enter valid Email Address.' })
-		.min(3),
-	password: z
-		.string()
-		.min(8, { message: 'Password should be at least 8 Characters.' }),
+// Schema validation for the login form
+const loginSchema = z.object({
+	email: z.string().email({ message: 'Please enter a valid email address.' }).min(3),
+	password: z.string().min(8, { message: 'Password should be at least 8 characters.' }),
 });
 
 const LoginPage = () => {
+	const navigate = useNavigate(); // Initialize navigate
 	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({ resolver: zodResolver(schema) });
+		register: loginRegister,
+		handleSubmit: handleLoginSubmit,
+		formState: { errors: loginErrors },
+		watch: watchLoginFields,
+	} = useForm({
+		resolver: zodResolver(loginSchema),
+	});
+
+	const {
+		register: registrationRegister,
+		handleSubmit: handleRegistrationSubmit,
+		formState: { errors: registrationErrors },
+		trigger: triggerRegistrationValidation,
+		watch: watchRegistrationFields,
+	} = useForm({
+		resolver: zodResolver(registrationSchema),
+	});
 
 	const [formError, setFormError] = useState('');
 	const [isForgotPasswordOpen, setForgotPasswordOpen] = useState(false);
 	const [isNewUserOpen, setNewUserOpen] = useState(false);
+	const [profilePic, setProfilePic] = useState(null);
+	const [isLoggingIn, setIsLoggingIn] = useState(false);
+	const [isRegistering, setIsRegistering] = useState(false);
 	const location = useLocation();
 
-	const onSubmit = async (formData) => {
+	// Watch all form fields for login
+	const watchLoginAllFields = watchLoginFields();
+
+	// Watch all form fields for new user registration
+	const watchRegistrationAllFields = watchRegistrationFields();
+
+	const onLoginSubmit = async (formData) => {
 		try {
-			await login(formData);
-			const { state } = location;
-			window.location = state ? state.from : '/';
+			setIsLoggingIn(true);
+			await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulation
+			toast.success('Groover Login Successful!');
+			setTimeout(() => {
+				navigate('/');
+			}, 2000);
 		} catch (err) {
 			if (err.response && err.response.status === 400) {
 				setFormError(err.response.data.message);
+				toast.error(err.response.data.message);
 			}
+		} finally {
+			setIsLoggingIn(false);
+		}
+	};
+
+	const onRegistrationSubmit = async (formData) => {
+		try {
+			setIsRegistering(true); // Set processing state
+			await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulation
+			console.log('New user registration data', formData);
+			toast.success('Groover Registration successful!');
+			setTimeout(() => {
+				navigate('/');
+			}, 2000);
+		} catch (err) {
+			setFormError('An error occurred during registration. Please try again.');
+			toast.error('An error occurred during registration. Please try again.');
+		} finally {
+			setIsRegistering(false);
 		}
 	};
 
 	const handleForgotPassword = () => setForgotPasswordOpen(true);
 	const handleNewUser = () => setNewUserOpen(true);
 
+	// Check if the login form is valid
+	const isLoginFormValid = watchLoginAllFields.email && watchLoginAllFields.password && !loginErrors.email && !loginErrors.password;
+
+	// Check if the registration form is valid
+	const isRegistrationFormValid =
+		watchRegistrationAllFields.name &&
+		watchRegistrationAllFields.email &&
+		watchRegistrationAllFields.password &&
+		watchRegistrationAllFields.cpassword &&
+		watchRegistrationAllFields.address &&
+		!registrationErrors.name &&
+		!registrationErrors.email &&
+		!registrationErrors.password &&
+		!registrationErrors.cpassword &&
+		!registrationErrors.address;
+
 	return (
 		<>
-			<section className="flex items-center justify-center min-h-screen bg-gray-100">
+			{/* Login Form */}
+			<section className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
 				<form
-					onSubmit={handleSubmit(onSubmit)}
+					onSubmit={handleLoginSubmit(onLoginSubmit)}
 					className="w-full max-w-md py-8 px-6 bg-white rounded shadow-md"
 				>
-					<h2 className="text-3xl font-bold mb-6 text-center">
-						Groover Login
-					</h2>
+					<h2 className="text-3xl font-bold mb-6 text-center">Groover Login</h2>
 
 					<div className="form_inputs">
-						<div className="flex flex-col mb-5">
-							<label
-								htmlFor="email"
-								className="text-lg font-semibold mb-2"
-							>
-								Email
-							</label>
-							<input
-								type="email"
-								id="email"
-								className="h-12 px-3 text-lg font-medium border rounded outline-none focus:ring-2 focus:ring-spanishOrange"
-								placeholder="Enter your Email Address"
-								{...register('email')}
-							/>
-							{errors.email && (
-								<em className="form_error text-red-600">
-									{errors.email.message}
-								</em>
-							)}
-						</div>
-						<div className="flex flex-col mb-5">
-							<label
-								htmlFor="password"
-								className="text-lg font-semibold mb-2"
-							>
-								Password
-							</label>
-							<input
-								type="password"
-								id="password"
-								className="h-12 px-3 text-lg font-medium border rounded outline-none focus:ring-2 focus:ring-spanishOrange"
-								placeholder="Enter your password"
-								{...register('password')}
-							/>
-							{errors.password && (
-								<em className="form_error text-red-600">
-									{errors.password.message}
-								</em>
-							)}
-						</div>
+						<InputField
+							id="email"
+							label="Email"
+							type="email"
+							register={loginRegister('email')}
+							errors={loginErrors.email}
+						/>
+
+						<InputField
+							id="password"
+							label="Password"
+							type="password"
+							register={loginRegister('password')}
+							errors={loginErrors.password}
+						/>
 
 						{formError && (
-							<em className="form_error text-xs text-red-500">
-								{formError}
-							</em>
+							<em className="form_error text-xs text-red-500">{formError}</em>
 						)}
 
 						<button
 							type="submit"
-							className="h-12 w-full mt-6 text-lg font-semibold bg-spanishOrange text-white rounded 
-                            hover:bg-earthYellow focus:outline-none focus:ring-2 focus:ring-spanishOrange"
+							className={`h-12 w-full mt-6 text-lg font-semibold bg-spanishOrange text-white rounded 
+                            hover:bg-earthYellow focus:outline-none focus:ring-2 focus:ring-spanishOrange
+                            ${!isLoginFormValid || isLoggingIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+							disabled={!isLoginFormValid || isLoggingIn}
 						>
-							Submit
+							{isLoggingIn ? 'Logging in...' : 'Submit'}
 						</button>
 
 						<div className="flex justify-between mt-4">
@@ -135,13 +181,10 @@ const LoginPage = () => {
 			{isForgotPasswordOpen && (
 				<Modal onClose={() => setForgotPasswordOpen(false)} title="Reset Password">
 					<form className="flex flex-col">
-						<label htmlFor="reset-email" className="mb-2 block text-lg text-gray-600 text-left">
-							Enter your email address
-						</label>
-						<input
-							type="email"
+						<InputField
 							id="reset-email"
-							className="mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-spanishOrange"
+							label="Enter your email address"
+							type="email"
 						/>
 						<button className="bg-spanishOrange hover:bg-earthYellow text-white px-4 py-2 rounded">
 							Reset
@@ -150,34 +193,90 @@ const LoginPage = () => {
 				</Modal>
 			)}
 
-			{/* New User Modal */}
+			{/* New User Registration Modal */}
 			{isNewUserOpen && (
-				<Modal onClose={() => setNewUserOpen(false)} title="Create New Account">
-					<form className="flex flex-col">
-						<label htmlFor="new-email" className="mb-2">
-							Email
-						</label>
-						<input
-							type="email"
+				<Modal onClose={() => setNewUserOpen(false)} title="Create Groover Account">
+					<UserProfileUpload profilePic={profilePic} setProfilePic={setProfilePic} />
+
+					{/* New User Registration Form */}
+					<form onSubmit={handleRegistrationSubmit(onRegistrationSubmit)} className="flex flex-col space-y-3">
+						<InputField
+							id="new-name"
+							label="Full Name"
+							placeholder="Enter Your Full Name"
+							register={registrationRegister('name')}
+							errors={registrationErrors.name}
+							onBlur={() => triggerRegistrationValidation('name')}
+						/>
+
+						<InputField
 							id="new-email"
-							className="mb-4 p-2 border rounded"
-							placeholder="Email Address"
+							label="Email"
+							type="email"
+							placeholder="Enter Your Email"
+							register={registrationRegister('email')}
+							errors={registrationErrors.email}
+							onBlur={() => triggerRegistrationValidation('email')}
 						/>
-						<label htmlFor="new-password" className="mb-2">
-							Password
-						</label>
-						<input
-							type="password"
+
+						<InputField
 							id="new-password"
-							className="mb-4 p-2 border rounded"
-							placeholder="Password"
+							label="Password"
+							type="password"
+							placeholder="Enter Your Password"
+							register={registrationRegister('password')}
+							errors={registrationErrors.password}
+							onBlur={() => triggerRegistrationValidation('password')}
 						/>
-						<button className="bg-spanishOrange text-white px-4 py-2 rounded">
-							Register
+
+						<InputField
+							id="new-cpassword"
+							label="Confirm Password"
+							type="password"
+							placeholder="Confirm Your Password"
+							register={registrationRegister('cpassword')}
+							errors={registrationErrors.cpassword}
+							onBlur={() => triggerRegistrationValidation('cpassword')}
+						/>
+
+						<div>
+							<label htmlFor="new-address" className="mb-2 block text-lg text-gray-600 text-left">
+								Delivery Address
+							</label>
+							<textarea
+								id="new-address"
+								className="input_textarea w-full text-[17px] font-medium h-32 p-3 border rounded focus:outline-none focus:ring-2 focus:ring-spanishOrange resize-none"
+								placeholder="Enter Delivery Address"
+								{...registrationRegister('address')}
+								onBlur={() => triggerRegistrationValidation('address')}
+							/>
+							{registrationErrors.address && (
+								<em className="form_error text-red-700">
+									{registrationErrors.address.message}
+								</em>
+							)}
+						</div>
+
+						{formError && (
+							<em className="form_error text-xs text-red-700">
+								{formError}
+							</em>
+						)}
+
+						<button
+							type="submit"
+							className={`bg-spanishOrange hover:bg-earthYellow text-white px-4 py-2 rounded
+                            ${!isRegistrationFormValid || isRegistering ? 'opacity-50 cursor-not-allowed' : ''}`}
+							disabled={!isRegistrationFormValid || isRegistering}
+						>
+							{isRegistering ? 'Registering...' : 'Register'}
 						</button>
 					</form>
 				</Modal>
 			)}
+
+			
+			<ToastContainer />
 		</>
 	);
 };

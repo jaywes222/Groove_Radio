@@ -3,8 +3,8 @@ import { createPortal } from 'react-dom';
 
 const Modal = ({ onClose, title, children }) => {
     return createPortal(
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+        <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="modal-content shadow-lg relative bg-white p-6 rounded-lg w-[90%] sm:w-[500px] max-h-[90vh] overflow-y-auto">
                 {/* Close Button */}
                 <button
                     className="absolute top-4 right-4 text-black hover:text-gray-500 focus:outline-none"
