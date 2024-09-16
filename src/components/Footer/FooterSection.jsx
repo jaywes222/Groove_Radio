@@ -3,6 +3,7 @@ import facebookIcon from '/src/assets/icon-facebook.svg';
 import twitterIcon from '/src/assets/icon-twitter.svg';
 import youtubeIcon from '/src/assets/icon-youtube.svg';
 import instagramIcon from '/src/assets/icon-instagram.svg';
+import Jack from '../Common/Jack';
 
 const FooterSection = () => {
     return (
@@ -39,9 +40,7 @@ const FooterSection = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="font-bold text-white">
-                            &copy; 2024. Groove Radio. All Rights Reserved
-                        </div>
+                        <Jack />
                     </div>
                 </div>
             </div>
