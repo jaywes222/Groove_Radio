@@ -37,7 +37,7 @@ const Merchandise = () => {
         setTimeout(() => {
             setProducts(productsData);
             setLoading(false);
-        }, 2000); // Simulate a 2-second load time
+        }, 2000);
     }, []);
 
     const handleCategoryClick = (category) => {
