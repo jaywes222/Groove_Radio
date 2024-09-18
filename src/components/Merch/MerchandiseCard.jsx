@@ -6,11 +6,7 @@ const MerchandiseCard = ({ image, title, description, price }) => {
 
     // URL-encode the message
     const encodedMessage = encodeURIComponent(message);
-
-    // Create the WhatsApp Click-to-Chat link
     const whatsappLink = `https://wa.me/?text=${encodedMessage}`;
-
-    // Open WhatsApp in a new tab or window
     window.open(whatsappLink, '_blank');
   };
 
