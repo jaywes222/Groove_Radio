@@ -33,3 +33,6 @@ const MerchandiseCard = ({ image, title, description, price }) => {
     </div>
   );
 };
+
+
+export default MerchandiseCard;
