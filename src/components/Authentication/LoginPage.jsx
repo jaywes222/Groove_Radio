@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,8 +6,9 @@ import { z } from 'zod';
 import Modal from '../Common/Modal';
 import UserProfileUpload from './UserProfileUpload';
 import InputField from '../Common/InputField';
-import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Import toast CSS
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { UserContext } from '../../contexts/userContext';
 
 // Schema validation using Zod for the new user registration
 const registrationSchema = z.object({
@@ -28,12 +29,14 @@ const loginSchema = z.object({
 });
 
 const LoginPage = () => {
-	const navigate = useNavigate(); // Initialize navigate
+	const navigate = useNavigate();
+	const { setUser } = useContext(UserContext);
 	const {
 		register: loginRegister,
 		handleSubmit: handleLoginSubmit,
 		formState: { errors: loginErrors },
 		watch: watchLoginFields,
+		reset: loginReset,
 	} = useForm({
 		resolver: zodResolver(loginSchema),
 	});
@@ -44,6 +47,7 @@ const LoginPage = () => {
 		formState: { errors: registrationErrors },
 		trigger: triggerRegistrationValidation,
 		watch: watchRegistrationFields,
+		reset: registrationReset,
 	} = useForm({
 		resolver: zodResolver(registrationSchema),
 	});
@@ -56,25 +60,34 @@ const LoginPage = () => {
 	const [isRegistering, setIsRegistering] = useState(false);
 	const location = useLocation();
 
-	// Watch all form fields for login
 	const watchLoginAllFields = watchLoginFields();
-
-	// Watch all form fields for new user registration
 	const watchRegistrationAllFields = watchRegistrationFields();
 
-	const onLoginSubmit = async (formData) => {
+	const handleLogin = async (data) => {
+		setIsLoggingIn(true);
 		try {
-			setIsLoggingIn(true);
-			await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulation
-			toast.success('Groover Login Successful!');
-			setTimeout(() => {
+			// Simulate a mock login delay
+			await new Promise((resolve) => setTimeout(resolve, 1500));
+
+			// Mock credentials for a successful login
+			const mockEmail = 'user@example.com';
+			const mockPassword = 'password123';
+
+			if (data.email === mockEmail && data.password === mockPassword) {
+				// Store authentication status and user data in localStorage
+				localStorage.setItem('isAuthenticated', 'true');
+				const user = { email: mockEmail }; // Mock user object
+				localStorage.setItem('user', JSON.stringify(user));
+				setUser(user); // Update user state in context
+				toast.success('Login successful! Redirecting...');
+
+				// Directly navigate after success
 				navigate('/');
-			}, 2000);
-		} catch (err) {
-			if (err.response && err.response.status === 400) {
-				setFormError(err.response.data.message);
-				toast.error(err.response.data.message);
+			} else {
+				toast.error('Invalid credentials. Please try again.');
 			}
+		} catch (error) {
+			toast.error('An error occurred. Please try again later.');
 		} finally {
 			setIsLoggingIn(false);
 		}
@@ -82,10 +95,14 @@ const LoginPage = () => {
 
 	const onRegistrationSubmit = async (formData) => {
 		try {
-			setIsRegistering(true); // Set processing state
-			await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulation
+			setIsRegistering(true);
+			await new Promise((resolve) => setTimeout(resolve, 2000));
 			console.log('New user registration data', formData);
 			toast.success('Groover Registration successful!');
+
+			// Clear the registration form
+			registrationReset();
+
 			setTimeout(() => {
 				navigate('/');
 			}, 2000);
@@ -100,10 +117,7 @@ const LoginPage = () => {
 	const handleForgotPassword = () => setForgotPasswordOpen(true);
 	const handleNewUser = () => setNewUserOpen(true);
 
-	// Check if the login form is valid
 	const isLoginFormValid = watchLoginAllFields.email && watchLoginAllFields.password && !loginErrors.email && !loginErrors.password;
-
-	// Check if the registration form is valid
 	const isRegistrationFormValid =
 		watchRegistrationAllFields.name &&
 		watchRegistrationAllFields.email &&
@@ -121,7 +135,7 @@ const LoginPage = () => {
 			{/* Login Form */}
 			<section className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
 				<form
-					onSubmit={handleLoginSubmit(onLoginSubmit)}
+					onSubmit={handleLoginSubmit(handleLogin)}
 					className="w-full max-w-md py-8 px-6 bg-white rounded shadow-md"
 				>
 					<h2 className="text-3xl font-bold mb-6 text-center">Groover Login</h2>
@@ -198,7 +212,6 @@ const LoginPage = () => {
 				<Modal onClose={() => setNewUserOpen(false)} title="Create Groover Account">
 					<UserProfileUpload profilePic={profilePic} setProfilePic={setProfilePic} />
 
-					{/* New User Registration Form */}
 					<form onSubmit={handleRegistrationSubmit(onRegistrationSubmit)} className="flex flex-col space-y-3">
 						<InputField
 							id="new-name"
@@ -239,33 +252,23 @@ const LoginPage = () => {
 							onBlur={() => triggerRegistrationValidation('cpassword')}
 						/>
 
-						<div>
-							<label htmlFor="new-address" className="mb-2 block text-lg text-gray-600 text-left">
-								Delivery Address
-							</label>
-							<textarea
-								id="new-address"
-								className="input_textarea w-full text-[17px] font-medium h-32 p-3 border rounded focus:outline-none focus:ring-2 focus:ring-spanishOrange resize-none"
-								placeholder="Enter Delivery Address"
-								{...registrationRegister('address')}
-								onBlur={() => triggerRegistrationValidation('address')}
-							/>
-							{registrationErrors.address && (
-								<em className="form_error text-red-700">
-									{registrationErrors.address.message}
-								</em>
-							)}
-						</div>
+						<InputField
+							id="address"
+							label="Address"
+							placeholder="Enter Your Address"
+							register={registrationRegister('address')}
+							errors={registrationErrors.address}
+							onBlur={() => triggerRegistrationValidation('address')}
+						/>
 
 						{formError && (
-							<em className="form_error text-xs text-red-700">
-								{formError}
-							</em>
+							<em className="form_error text-xs text-red-500">{formError}</em>
 						)}
 
 						<button
 							type="submit"
-							className={`bg-spanishOrange hover:bg-earthYellow text-white px-4 py-2 rounded
+							className={`h-12 w-full mt-6 text-lg font-semibold bg-spanishOrange text-white rounded 
+                            hover:bg-earthYellow focus:outline-none focus:ring-2 focus:ring-spanishOrange
                             ${!isRegistrationFormValid || isRegistering ? 'opacity-50 cursor-not-allowed' : ''}`}
 							disabled={!isRegistrationFormValid || isRegistering}
 						>
@@ -275,7 +278,6 @@ const LoginPage = () => {
 				</Modal>
 			)}
 
-			
 			<ToastContainer />
 		</>
 	);

@@ -13,6 +13,7 @@ export const theme = {
       spanishOrange: '#E66F00',
       battleshipGray: '#A19A91',
       cocoaBrown: '#D4651E',
+      screaminGreen: '#76FF7A'
     },
     fontFamily: {
       sans: ['Rubik', 'sans-serif'],

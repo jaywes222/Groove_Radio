@@ -9,7 +9,8 @@ import NewsLetterSignUpSection from '../NewsLetter/NewsLetterSignUpSection';
 import PodAdSection from '../PodAd/PodAdSection';
 import HeroSection from './HeroSection';
 import ScheduleTable from '../Schedule/ScheduleTable';
-import Jack from '../Common/Jack';
+import PlaylistPage from '../Playlist/PlaylistPage';
+
 
 const HomePage = () => {
 	return (
