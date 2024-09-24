@@ -6,7 +6,11 @@ const MerchandiseCard = ({ image, title, description, price }) => {
 
     // URL-encode the message
     const encodedMessage = encodeURIComponent(message);
-    const whatsappLink = `https://wa.me/?text=${encodedMessage}`;
+
+    // Replace '1234567890' with the provider's WhatsApp number in international format
+    const whatsappLink = `https://wa.me/254792062635?text=${encodedMessage}`;
+    
+    // Open the WhatsApp chat
     window.open(whatsappLink, '_blank');
   };
 
