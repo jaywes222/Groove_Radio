@@ -1,27 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import facebookIcon from '../../assets/icon-facebook.svg';
 import twitterIcon from '../../assets/icon-twitter.svg';
 import instagramIcon from '../../assets/icon-instagram.svg';
+import LinkWithIcon from '../Navbar/LinkWithIcon';
 import Jack from './Jack';
+import { Link } from 'react-router-dom';
 
 const Drawer = ({ isOpen, closeDrawer, items }) => {
+    const [activeItem, setActiveItem] = useState(null);
+
+    const handleItemClick = (index) => {
+        setActiveItem(index);
+        closeDrawer(); 
+    };
+
     return (
         <div
             className={`fixed top-0 right-0 w-64 h-full bg-gray-800 text-white transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
                 } transition-transform duration-300 ease-in-out z-40 flex flex-col justify-between`}
         >
-            {/* Drawer Items with Margin-Top */}
+            {/* Drawer Items */}
             <ul className="space-y-4 p-4 mt-14 flex-grow">
                 {items.map((item, index) => (
                     <li key={index}>
-                        <Link
-                            to={item.link}
-                            onClick={closeDrawer}
-                            className="block p-2 hover:bg-gray-700"
-                        >
-                            {item.title}
-                        </Link>
+                        <LinkWithIcon
+                            title={item.title}
+                            link={item.link}
+                            emoji={item.emoji}  
+                            onClick={() => handleItemClick(index)}  
+                            className={`block p-2 hover:bg-gray-700 ${activeItem === index ? 'bg-spanishOrange' : ''}`}
+                        />
                     </li>
                 ))}
             </ul>
