@@ -17,3 +17,8 @@
         @apply absolute rounded-r-full top-60 bg-tigerEye;
     }
 }
+
+body {
+    position: relative;
+    overflow-x: hidden; /* Prevent horizontal scroll when drawer opens */
+}
