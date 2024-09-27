@@ -11,7 +11,7 @@ const Drawer = ({ isOpen, closeDrawer, items }) => {
 
     const handleItemClick = (index) => {
         setActiveItem(index);
-        closeDrawer(); 
+        closeDrawer(); // Close the drawer when an item is clicked
     };
 
     return (
@@ -26,8 +26,8 @@ const Drawer = ({ isOpen, closeDrawer, items }) => {
                         <LinkWithIcon
                             title={item.title}
                             link={item.link}
-                            emoji={item.emoji}  
-                            onClick={() => handleItemClick(index)}  
+                            emoji={item.emoji}
+                            onClick={() => handleItemClick(index)}  // Trigger close on item click
                             className={`block p-2 hover:bg-gray-700 ${activeItem === index ? 'bg-spanishOrange' : ''}`}
                         />
                     </li>
