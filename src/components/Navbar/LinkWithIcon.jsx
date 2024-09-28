@@ -1,12 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const LinkWithIcon = ({ title, link, emoji, toggleMenu }) => {
+const LinkWithIcon = ({ title, link, emoji, toggleMenu, toggleDrawer }) => {
+	const handleClick = () => {
+		if (toggleMenu) toggleMenu();
+		if (toggleDrawer) toggleDrawer(); 
+	};
+
 	return (
 		<NavLink
 			to={link}
-			className="flex items-center space-x-2 text-gray-400 text-lg hover:text-earthYellow transition duration-300"
-			onClick={toggleMenu}
+			className={({ isActive }) =>
+				`flex items-center space-x-2 text-lg hover:text-earthYellow transition duration-300 ${isActive ? 'bg-spanishOrange rounded-full py-2 px-4' : ''}`
+			}
+			onClick={handleClick}
 		>
 			<span>{title}</span>
 			<img src={emoji} alt={`${title} icon`} className="w-5 h-5" />

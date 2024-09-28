@@ -7,13 +7,6 @@ import Jack from './Jack';
 import { Link } from 'react-router-dom';
 
 const Drawer = ({ isOpen, closeDrawer, items }) => {
-    const [activeItem, setActiveItem] = useState(null);
-
-    const handleItemClick = (index) => {
-        setActiveItem(index);
-        closeDrawer(); // Close the drawer when an item is clicked
-    };
-
     return (
         <div
             className={`fixed top-0 right-0 w-64 h-full bg-gray-800 text-white transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
@@ -27,8 +20,8 @@ const Drawer = ({ isOpen, closeDrawer, items }) => {
                             title={item.title}
                             link={item.link}
                             emoji={item.emoji}
-                            onClick={() => handleItemClick(index)}  // Trigger close on item click
-                            className={`block p-2 hover:bg-gray-700 ${activeItem === index ? 'bg-spanishOrange' : ''}`}
+                            toggleDrawer={closeDrawer}  // Trigger close on item click
+                            className='block p-2 hover:bg-gray-700'
                         />
                     </li>
                 ))}
