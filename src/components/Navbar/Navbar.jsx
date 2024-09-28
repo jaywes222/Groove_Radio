@@ -64,7 +64,7 @@ const Navbar = () => {
 					)}
 				</div>
 
-				<div className={`${isOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row items-center md:space-x-6 space-y-4 md:space-y-0 w-full md:w-auto bg-gray-900 md:bg-transparent md:px-0 px-6 py-4 md:py-0 z-50`}>
+				<div className={`${isOpen ? 'block' : 'hidden'} text-gray-400 md:flex flex-col md:flex-row items-center md:space-x-6 space-y-4 md:space-y-0 w-full md:w-auto bg-gray-900 md:bg-transparent md:px-0 px-6 py-4 md:py-0 z-50`}>
 					<LinkWithIcon title="Home" link="/" emoji={home} toggleMenu={toggleMenu} />
 					<LinkWithIcon title="Schedule" link="/schedule" emoji={schedule} toggleMenu={toggleMenu} />
 					<LinkWithIcon title="Archives" link="/archives" emoji={archive} toggleMenu={toggleMenu} />
