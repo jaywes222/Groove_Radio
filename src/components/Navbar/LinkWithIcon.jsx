@@ -11,7 +11,7 @@ const LinkWithIcon = ({ title, link, emoji, toggleMenu, toggleDrawer }) => {
 		<NavLink
 			to={link}
 			className={({ isActive }) =>
-				`flex items-center space-x-2 text-lg hover:text-earthYellow transition duration-300 ${isActive ? 'bg-spanishOrange rounded-full py-2 px-4' : ''}`
+				`flex items-center space-x-2 text-lg  transition duration-300 ${isActive ? 'bg-spanishOrange rounded-full py-2 px-4 text-white' : 'text-gray-400'}`
 			}
 			onClick={handleClick}
 		>
